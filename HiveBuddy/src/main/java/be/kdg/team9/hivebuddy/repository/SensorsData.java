@@ -2,38 +2,45 @@ package com.sunhive.hivebuddy.repository;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.io.ResourceLoader;
 
-import java.io.*;
-import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Repository
 public class SensorsData {
-    private String data;
-    //private InputStream inputStream = null;
+    private static List<Double> numbers = new ArrayList<>();
 
-    public Resource loadDataWithClassPathResource() {
-        return new ClassPathResource("C:\\Users\\adein\\OneDrive\\Documents\\sunhive\\HiveBuddy\\src\\main\\resources\\dataFile.txt");
+    private final ResourceLoader resourceLoader;
+
+    public SensorsData(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+        loadData();
     }
 
-//    @GetMapping("/id")
-//    public String[] getData2(){
-//        Resource resource = loadDataWithClassPathResource();
-//        File file = null;
-//        String[] array = null;
-//        try {
-//            file = resource.getFile();
-//            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-//            array = bufferedReader.lines().collect(Collectors.joining()).split(",");
-//            System.out.println(Arrays.asList(array));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return array;
-//    }
+    private void loadData() {
+        try {
+            Resource resource = new ClassPathResource("resources/dataFile.txt");
+            InputStream inputStream = resource.getInputStream();
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    double number = Double.parseDouble(line.trim());
+                    numbers.add(number);
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error loading data from file", e);
+        }
+    }
+
+    public static List<Double> getNumbers() {
+        return numbers;
+    }
 }
+

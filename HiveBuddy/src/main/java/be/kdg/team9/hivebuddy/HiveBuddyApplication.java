@@ -8,7 +8,6 @@ public class HiveBuddyApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HiveBuddyApplication.class, args);
-//		getData2()
 	}
 
 }
