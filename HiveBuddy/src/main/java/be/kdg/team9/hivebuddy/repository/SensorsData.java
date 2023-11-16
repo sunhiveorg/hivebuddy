@@ -12,68 +12,28 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
-//@RequestMapping("/data")
+@Repository
 public class SensorsData {
     private String data;
-    private InputStream inputStream = null;
-//    public List<String> readData() {
-//        return getData2();
-//    }
+    //private InputStream inputStream = null;
 
     public Resource loadDataWithClassPathResource() {
-        return new ClassPathResource("C:\\Users\\adein\\OneDrive\\Documents\\sunhive\\HiveBuddy\\src\\main\\resources\\templates\\dataFile.txt");
-    }
-    @GetMapping("/")
-    public String sayHello() {
-        return "Hello World!";
+        return new ClassPathResource("C:\\Users\\adein\\OneDrive\\Documents\\sunhive\\HiveBuddy\\src\\main\\resources\\dataFile.txt");
     }
 
-    @GetMapping("/id")
-    public String[] getData2(){
-        Resource resource = loadDataWithClassPathResource();
-        File file = null;
-        String[] array = null;
-        try {
-            file = resource.getFile();
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            array = bufferedReader.lines().collect(Collectors.joining()).split(",");
-            System.out.println(Arrays.asList(array));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return array;
-    }
-
-
-//    private String readFromInputStream(InputStream inputStream)
-//            throws IOException {
-//        StringBuilder resultStringBuilder = new StringBuilder();
-//        try (BufferedReader br
-//                     = new BufferedReader(new InputStreamReader(inputStream))) {
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                resultStringBuilder.append(line).append("\n");
-//            }
-//        }
-//        return resultStringBuilder.toString();
-//    }
-//
-//    public String getData() {
+//    @GetMapping("/id")
+//    public String[] getData2(){
+//        Resource resource = loadDataWithClassPathResource();
+//        File file = null;
+//        String[] array = null;
 //        try {
-//            File file = new File(classLoader.getResource("fileTest.txt").getFile());
-//            inputStream = new FileInputStream(file);
-//            data = readFromInputStream(inputStream);
+//            file = resource.getFile();
+//            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+//            array = bufferedReader.lines().collect(Collectors.joining()).split(",");
+//            System.out.println(Arrays.asList(array));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
 //        }
-//        finally {
-//            if (inputStream != null) {
-//                try {
-//                    inputStream.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        return data;
+//        return array;
 //    }
 }
