@@ -1,12 +1,16 @@
-package com.sunhive.hivebuddy.controllers;
+// package com.sunhive.hivebuddy.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+// import java.util.List;
 
-@Controller
-public class IndexController {
-    @GetMapping
-    public String getIndexPage(){
-        return "index";
-    }
-}
+// import org.springframework.stereotype.Controller;
+// import org.springframework.web.bind.annotation.GetMapping;
+
+// @Controller
+// public class IndexController {
+//     @GetMapping
+//     public List<String> getIndexPage(){
+//         return List.of("Hello","World");
+//         // return "index";
+
+//     }
+// }
