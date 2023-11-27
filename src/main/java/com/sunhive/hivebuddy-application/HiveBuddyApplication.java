@@ -1,6 +1,6 @@
 package com.sunhive.hivebuddy;
 
-import com.sunhive.hivebuddy.data.ArduinoDataReceiver;
+//import com.sunhive.hivebuddy.data.ArduinoDataReceiver;
 import com.fazecast.jSerialComm.SerialPort;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

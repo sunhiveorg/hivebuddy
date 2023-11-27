@@ -16,10 +16,4 @@ public class DataController {
     public DataController(TemperatureService temperatureService) {
         this.temperatureService = temperatureService;
     }
-
-    @GetMapping
-    public String getTemperatureData(Model model) {
-        model.addAttribute("temperatures", temperatureService.getNumbers());
-        return "data/temperature";
-    }
 }
