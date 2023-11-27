@@ -28,6 +28,9 @@ public class ArduinoDataReceiver implements SerialPortDataListener {
 
                 // Clear the buffer for the next message
                 receivedDataBuffer.setLength(0);
+
+                // TODO:
+                // Process data for DB then save each entry using sensorDataService.addNewData(sensorData) like in SensorDataController
             }
         }
     }

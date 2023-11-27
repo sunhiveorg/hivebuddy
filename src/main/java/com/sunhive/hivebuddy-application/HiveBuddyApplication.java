@@ -1,11 +1,24 @@
 package com.sunhive.hivebuddy;
 
+<<<<<<< HEAD
 //import com.sunhive.hivebuddy.data.ArduinoDataReceiver;
+=======
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.List;
+
+import com.sunhive.hivebuddy.data.ArduinoDataReceiver;
+>>>>>>> 8e603a3d869800e47a3ac041df4052ea93289670
 import com.fazecast.jSerialComm.SerialPort;
+import java.util.Timer;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Timer;
+import com.sunhive.hivebuddy.data.SensorData;
+
 
 @SpringBootApplication
 public class HiveBuddyApplication {
@@ -31,4 +44,5 @@ public class HiveBuddyApplication {
         sp.addDataListener(timedSchedule);
         System.out.println("Listen: " + timedSchedule.getListeningEvents());
     }
+
 }
