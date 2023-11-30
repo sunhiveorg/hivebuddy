@@ -2,7 +2,7 @@ export const navBarStyles = {
     appBar: {
         fontFamily: 'monospace',
         backgroundColor: 'rgba(241,196,0,0.4)',
-        alignItems: 'center',
+        height: '80px',
     },
     box: {
         flexGrow: 1,
@@ -12,16 +12,17 @@ export const navBarStyles = {
             color: 'black',
         }
     },
-    // logo: {
-    //     image: 'url("https://images.pexels.com/photos/63641/bee-in-the-approach-bee-apis-pollen-63641.jpeg")',
-    //     height: '50px',
-    //     width: '50px',
-    //     marginRight: '10px',
-    // }
-    // tabs: {
-    //     '& .MuiTabs-selected': {
-    //         textColor: '#000000',
-    //     }
-    // }
+    logoText: {
+        color: 'black',
+        fontFamily: 'monospace',
+        fontWeight: 'bold',
+        fontSize: '30px',
+        mt: '10px',
+        ml: '10px',
 
+    },
+    tabs: {
+        ml: '140px',
+        mt: '10px',
+    }
 }

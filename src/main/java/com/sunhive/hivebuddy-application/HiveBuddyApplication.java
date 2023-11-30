@@ -1,22 +1,13 @@
 package com.sunhive.hivebuddy;
 
-<<<<<<< HEAD
 //import com.sunhive.hivebuddy.data.ArduinoDataReceiver;
-=======
 /*
 TODO: remove 4 commented lines below
  */
 
-//<<<<<<< HEAD
-////import com.sunhive.hivebuddy.data.ArduinoDataReceiver;
-//=======
-
->>>>>>> f57df8a8dd5f0c82f50e3db62e9e32c213ea0d52
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
-
-//>>>>>>> 8e603a3d869800e47a3ac041df4052ea93289670
 
 import com.sunhive.hivebuddy.data.ArduinoDataReceiver;
 import com.fazecast.jSerialComm.SerialPort;

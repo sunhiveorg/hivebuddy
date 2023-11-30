@@ -8,7 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import {mainNavBarItems} from "./consts/navBarItems";
 import {navBarStyles} from "./Styles"
 import {useNavigate} from "react-router-dom";
-import {Tabs, Tab} from '@mui/material';
+import {Tabs, Tab, Typography} from '@mui/material';
 import {Link, animateScroll as scroll} from "react-scroll";
 import {AppBar, Box, Button, Divider,} from "@mui/material";
 import {Image} from "@mui/icons-material";
@@ -25,16 +25,18 @@ const Navbar = () => {
                         sx={{
                             height: 50,
                             width: 50,
-                            maxHeight: { xs: 233, md: 167 },
-                            maxWidth: { xs: 350, md: 250 },
+                            mt: '10px',
                         }}
-                        alt="The house from the offer."
-                        src="   https://cdn-icons-png.flaticon.com/512/5737/5737723.png "
+                        alt="Honeycomb"
+                        src="https://cdn-icons-png.flaticon.com/512/5737/5737723.png "
                     />
+
+                    <Typography sx={navBarStyles.logoText}>HiveBuddy</Typography>
 
                     <Tabs
                         TabIndicatorProps={{sx: {backgroundColor: "#000000"}}}
                         value={value} onChange={(e, val) => setValue(val)}
+                        sx={navBarStyles.tabs}
                     >
                         {mainNavBarItems.map((item, index) => (
                             <Tab key={index} label={item.label}></Tab>

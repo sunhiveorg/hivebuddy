@@ -24,6 +24,13 @@ export const PageStyles = {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    container: {
+        color: '#030000',
+        fontSize: '20px',
+        mt: '50px',
+        backgroundColor: 'white',
+        opacity: '0.6',
     }
 }
 
