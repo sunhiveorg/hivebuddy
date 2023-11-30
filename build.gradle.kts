@@ -17,9 +17,9 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-<<<<<<< HEAD
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 	runtimeOnly ("com.h2database:h2")
@@ -33,7 +33,7 @@ dependencies {
 	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
 	implementation("org.postgresql:postgresql:42.6.0")
 	implementation("org.webjars:bootstrap:5.3.2")
-=======
+
 	//developmentOnly("org.springframework.boot:spring-boot-devtools")
 	//implementation("org.springframework.boot:spring-boot-starter-actuator")
 	//implementation("org.springframework.boot:spring-boot-starter-security")
@@ -50,7 +50,6 @@ dependencies {
 	//implementation("org.postgresql:postgresql:42.6.0")
 	//implementation("org.webjars:bootstrap:5.3.2")
 
->>>>>>> 8e603a3d869800e47a3ac041df4052ea93289670
 	implementation("com.fazecast:jSerialComm:2.10.4") // Serial stuff
 
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
