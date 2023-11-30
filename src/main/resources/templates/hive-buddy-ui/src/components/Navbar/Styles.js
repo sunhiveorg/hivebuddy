@@ -1,24 +1,27 @@
 export const navBarStyles = {
-    drawer: {
-        width: 320,
-        flexShrink: 0,
-        [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-            backgroundColor: '#F4D03F',
-            color: '#000000',
-        },
-        '&.Mui-selected': {
-            color: 'red',
-        }
+    appBar: {
+        fontFamily: 'monospace',
+        backgroundColor: 'rgba(241,196,0,0.4)',
+        alignItems: 'center',
     },
-    icons: {
-        color: '#B9770E',
-        marginLeft: '20px',
+    box: {
+        flexGrow: 1,
     },
     text: {
         '& span': {
-            color: '#000000',
+            color: 'black',
         }
-    }
+    },
+    // logo: {
+    //     image: 'url("https://images.pexels.com/photos/63641/bee-in-the-approach-bee-apis-pollen-63641.jpeg")',
+    //     height: '50px',
+    //     width: '50px',
+    //     marginRight: '10px',
+    // }
+    // tabs: {
+    //     '& .MuiTabs-selected': {
+    //         textColor: '#000000',
+    //     }
+    // }
+
 }
