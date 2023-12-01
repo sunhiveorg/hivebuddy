@@ -1,36 +1,31 @@
 package com.sunhive.hivebuddy.controllers;
 
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.sunhive.hivebuddy.data.SensorData;
-import com.sunhive.hivebuddy.services.SensorDataService;
+import com.sunhive.hivebuddy.services.SensorDataServiceImpl;
 
+@CrossyOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(path = "api/v1/data")
 public class SensorDataController {
-    private final SensorDataService sensorDataService;
+    private final SensorDataServiceImpl sensorDataServiceImpl;
 
     @Autowired
-    public SensorDataController(SensorDataService sensorDataService) {
-        this.sensorDataService = sensorDataService;
+    public SensorDataController(SensorDataServiceImpl sensorDataServiceImpl) {
+        this.sensorDataServiceImpl = sensorDataServiceImpl;
     }
 
     @GetMapping
-    public List<SensorData> getSensorData(){
-        return sensorDataService.getSensorDatas();
+    public List<SensorData> getSensorData() {
+        return sensorDataServiceImpl.getSensorDatas();
     }
 
     @PostMapping
-    public void registerNewSensorData(@RequestBody SensorData sensorData){
-        sensorDataService.addNewData(sensorData);
+    public void registerNewSensorData(@RequestBody SensorData sensorData) {
+        sensorDataServiceImpl.addNewData(sensorData);
     }
 }

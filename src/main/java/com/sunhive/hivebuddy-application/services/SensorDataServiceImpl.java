@@ -1,22 +1,20 @@
 package com.sunhive.hivebuddy.services;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.sunhive.hivebuddy.data.SensorData;
 import com.sunhive.hivebuddy.repository.SensorDataRepository;
 
 @Service
-public class SensorDataService {
+public class SensorDataServiceImpl implements SensorDataService {
     private final SensorDataRepository sensorDataRepository;
 
     @Autowired
-    public SensorDataService(SensorDataRepository sensorDataRepository) {
+    public SensorDataServiceImpl(SensorDataRepository sensorDataRepository) {
         this.sensorDataRepository = sensorDataRepository;
     }
 
