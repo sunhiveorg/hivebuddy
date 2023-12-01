@@ -47,9 +47,9 @@ public class SensorData {
     @Column(
         name = "value",
         nullable = false,
-        columnDefinition = "INT"
+        columnDefinition = "DOUBLE PRECISION"
     )
-    private int value;
+    private Double value;
 
     @Column(
         name = "timestamp",
@@ -61,7 +61,7 @@ public class SensorData {
     public SensorData() {
     }
 
-    public SensorData(Long id, Long sensorTypeId, Long hiveId, int value, LocalDateTime timestamp) {
+    public SensorData(Long id, Long sensorTypeId, Long hiveId, Double value, LocalDateTime timestamp) {
         this.id = id;
         this.sensorTypeId = sensorTypeId;
         this.hiveId = hiveId;
@@ -69,7 +69,7 @@ public class SensorData {
         this.timestamp = timestamp;
     }
 
-    public SensorData(Long sensorTypeId, Long hiveId, int value, LocalDateTime timestamp) {
+    public SensorData(Long sensorTypeId, Long hiveId, Double value, LocalDateTime timestamp) {
         this.sensorTypeId = sensorTypeId;
         this.hiveId = hiveId;
         this.value = value;
@@ -77,7 +77,7 @@ public class SensorData {
     }
 
     // for debug http requests
-    public SensorData(Long sensorTypeId, Long hiveId, int value) {
+    public SensorData(Long sensorTypeId, Long hiveId, Double value) {
         this.sensorTypeId = sensorTypeId;
         this.hiveId = hiveId;
         this.value = value;
@@ -107,11 +107,11 @@ public class SensorData {
         this.hiveId = hiveId;
     }
 
-    public int getValue() {
+    public Double getValue() {
         return this.value;
     }
 
-    public void setValue(int value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

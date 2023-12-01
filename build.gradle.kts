@@ -37,6 +37,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	runtimeOnly("org.postgresql:postgresql")
 
+	implementation("com.google.code.gson:gson:2.10.1")
+
 }
 
 tasks.withType<Test> {
