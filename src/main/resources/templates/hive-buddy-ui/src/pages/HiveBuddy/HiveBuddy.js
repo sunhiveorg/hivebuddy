@@ -1,6 +1,6 @@
 import React from 'react'
 import {Box, Container, Typography} from "@mui/material";
-import {PageStyles} from "./pageStyles";
+import {PageStyles} from "../consts/pageStyles";
 
 const HiveBuddy = () => {
     return (

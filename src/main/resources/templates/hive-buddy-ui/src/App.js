@@ -10,9 +10,9 @@ function App() {
         <div className="App">
             <Navbar/>
             <HiveBuddy/>
+            <Team/>
             <Process/>
             <Strengths/>
-            <Team/>
         </div>
     );
 }
