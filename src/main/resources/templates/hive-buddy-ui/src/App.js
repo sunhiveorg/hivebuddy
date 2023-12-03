@@ -9,10 +9,14 @@ function App() {
     return (
         <div className="App">
             <Navbar/>
-            <HiveBuddy/>
-            <Team/>
+            {/*${router.pathname === "/data"?*/}
+            {/*<HiveBuddy/>*/}
+            {/*:*/}
+            {/*<HiveBuddy/>*/}
+            {/*<Team/>*/}
+            {/*<Strengths/>*/}
+            {/*}*/}
             <Process/>
-            <Strengths/>
         </div>
     );
 }
