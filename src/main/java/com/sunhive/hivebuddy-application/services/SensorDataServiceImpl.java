@@ -22,7 +22,7 @@ public class SensorDataServiceImpl implements SensorDataService {
         return sensorDataRepository.findAll();
     }
     public List<SensorData> getSensorDatasLatestById(Long id) {
-        return sensorDataRepository.findAllLatestByHiveId(id);
+        return sensorDataRepository.findAllLatestByHiveId(id, LocalDateTime.now());
     }
 
     public void addNewData(SensorData sensorData) {
