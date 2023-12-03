@@ -17,19 +17,14 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 	runtimeOnly ("com.h2database:h2")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-web-services")
 
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
-	implementation("com.google.code.gson:gson:2.10.1")
 	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
 	implementation("org.postgresql:postgresql:42.6.0")
 	implementation("org.webjars:bootstrap:5.3.2")

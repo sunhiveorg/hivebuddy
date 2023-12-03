@@ -193,5 +193,4 @@ public class ArduinoDataReceiver implements SerialPortDataListener {
     private void saveDataToDatabase(SensorData sensorData){
         sensorDataService.addNewData(sensorData);
     }
-
 }
