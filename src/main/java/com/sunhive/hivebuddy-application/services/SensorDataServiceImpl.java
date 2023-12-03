@@ -21,6 +21,9 @@ public class SensorDataServiceImpl implements SensorDataService {
     public List<SensorData> getSensorDatas() {
         return sensorDataRepository.findAll();
     }
+    public List<SensorData> getSensorDatasLatestById(int id) {
+        return sensorDataRepository.findAll();
+    }
 
     public void addNewData(SensorData sensorData) {
         sensorData.setTimestamp(LocalDateTime.now());

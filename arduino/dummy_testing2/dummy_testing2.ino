@@ -104,11 +104,13 @@ void loop(){
 
   // Dummy data
   int hive_id = 1;
-  float temperatureOut = 20.500;
-  float temperatureIn = 23.0;
-  float humidityIn = 88.131;
-  float weight = 48.1;
-  float mic = 13.972313087;
+  double temperatureOut = 20.500;
+  double temperatureIn = 2309.0;
+  double humidityIn = 88.131;
+  double weight = 48.1;
+  double mic = 13233213.37231308;
+
+  // 1;20.50,2309.00,88.13,48.10,1323.97
 
   // Output General Info
   Serial.print(hive_id);
@@ -128,5 +130,5 @@ void loop(){
 
 
   Serial.println();
-  delay(1000);
+  delay(5000);
 }

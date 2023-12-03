@@ -24,6 +24,11 @@ public class SensorDataController {
         return sensorDataServiceImpl.getSensorDatas();
     }
 
+    @GetMapping("/latest")
+    public List<SensorData> getSensorDataLatestById(@RequestBody int id){
+        return sensorDataServiceImpl.getSensorDatasLatestById(id);
+    }
+
     @PostMapping
     public void registerNewSensorData(@RequestBody SensorData sensorData) {
         sensorDataServiceImpl.addNewData(sensorData);
