@@ -25,7 +25,7 @@ public class SensorDataController {
     }
 
     @GetMapping("/latest")
-    public List<SensorData> getSensorDataLatestById(@RequestBody int id){
+    public List<SensorData> getSensorDataLatestById(@RequestBody Long id){
         return sensorDataServiceImpl.getSensorDatasLatestById(id);
     }
 
