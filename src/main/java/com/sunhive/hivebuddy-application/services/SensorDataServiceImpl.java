@@ -1,6 +1,11 @@
 package com.sunhive.hivebuddy.services;
+import com.opencsv.CSVWriter;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +34,41 @@ public class SensorDataServiceImpl implements SensorDataService {
         sensorData.setTimestamp(LocalDateTime.now());
         sensorDataRepository.save(sensorData);
         System.out.println(sensorData);
+    }
+
+
+    // Returns List of Objects, by index 0 ID and date at Index 1
+//    public List<Object[]> getDataFrom(String sensorID, Date startDate) {
+//        return sensorDataRepository.getDataFrom(sensorID, startDate);
+//    }
+
+    /*
+    I DONT KNOW IF IT GONNA WORK, In theory I did everything right
+    should this code be here? i th
+     */
+
+    public void createCSVForSensorData(String sensorID, LocalDateTime startDate) {
+        List<Object[]> rawData = sensorDataRepository.getDataFrom(sensorID, startDate);
+
+        // Specify the CSV file path
+        String csvFilePath = "root/data_processing/csv_files/sensor_data.csv";
+
+        try (CSVWriter writer = new CSVWriter(new FileWriter(new File(csvFilePath)))) {
+
+            // Writing CSV header
+            writer.writeNext(new String[]{"Value", "Timestamp"});
+
+            // Writing data rows
+            for (Object[] row : rawData) {
+                String value = String.valueOf(row[0]); // Assuming value is a String, check with Rossy!!!
+                String timestamp = String.valueOf(row[1]); // Assuming timestamp is a String, check with Rossy!!!
+
+                writer.writeNext(new String[]{value, timestamp});
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Really bad handling but fuck it, ill come up with something later
+        }
     }
 
     // public void addNewData(
