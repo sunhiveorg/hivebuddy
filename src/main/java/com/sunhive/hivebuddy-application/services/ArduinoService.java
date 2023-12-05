@@ -28,7 +28,7 @@ public class ArduinoService {
         // Mac Sofiia
 //        var sp = SerialPort.getCommPort("/dev/cu.usbmodem112301");
         // Win Rossy
-        var sp = SerialPort.getCommPort("COM5");
+        var sp = SerialPort.getCommPort("COM7");
 
         //
         //
