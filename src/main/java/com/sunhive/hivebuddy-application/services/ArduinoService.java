@@ -21,17 +21,11 @@ public class ArduinoService {
 
     //    @Override
     public void gatherData(){
-        //
-        //
-
         // SET ARDUINO PORT HERE
         // Mac Sofiia
-//        var sp = SerialPort.getCommPort("/dev/cu.usbmodem112301");
+        var sp = SerialPort.getCommPort("/dev/cu.usbmodem112301");
         // Win Rossy
-        var sp = SerialPort.getCommPort("COM5");
-
-        //
-        //
+//        var sp = SerialPort.getCommPort("COM5");
 
         sp.setComPortParameters(9600, Byte.SIZE, SerialPort.ONE_STOP_BIT, SerialPort.NO_PARITY);
         sp.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0);

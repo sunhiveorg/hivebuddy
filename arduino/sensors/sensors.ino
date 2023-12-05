@@ -6,7 +6,7 @@
 #if defined(ESP8266)|| defined(ESP32) || defined(AVR)
 #include <EEPROM.h>
 #endif
-	
+
 int sound_sensor = A0; //assign to pin A2
 const int HX711_dout = 4; //mcu > HX711 dout pin
 const int HX711_sck = 5; //mcu > HX711 sck pin
@@ -22,7 +22,7 @@ void setup() {
   dht.begin(); // initialize the sensor
 
   LoadCell.begin();
-  //LoadCell.setReverseOutput(); //uncomment to turn a negative output value to positive
+  LoadCell.setReverseOutput(); //uncomment to turn a negative output value to positive
   unsigned long stabilizingtime = 2000; // preciscion right after power-up can be improved by adding a few seconds of stabilizing time
   boolean _tare = true; //set this to false if you don't want tare to be performed in the next step
   LoadCell.start(stabilizingtime, _tare);
@@ -35,48 +35,28 @@ void setup() {
     Serial.println("Startup is complete");
   }
   while (!LoadCell.update());
-  calibrate(); //start calibration procedure
+  // calibrate(); //start calibration procedure
 }
 
 void loop() {
-  unsigned double currentTime = millis();
-  // wait a few seconds between measurements.
-  delay(2000);
-  // read humidity
-  double humi  = dht.readHumidity();
-  // read temperature as Celsius
-  double tempC = dht.readTemperature();
-  int soundValue = 0; //create variable to store many different readings
-  for (int i = 0; i < 32; i++) //create a for loop to read 
-  { soundValue += analogRead(sound_sensor);  } //read the sound sensor
- 
-  soundValue >>= 5; //bitshift operation 
-
-
     static boolean newDataReady = 0;
   const int serialPrintInterval = 0; //increase value to slow down serial print activity
 
-  // check for new data/start next conversion:
-  if (LoadCell.update()) newDataReady = true;
+  unsigned long currentTime = millis();
+  // wait a few seconds between measurements.
+  delay(2000);
+    int hive_id = 1;
+  // read humidity
+  float humi = dht.readHumidity();
+  // read temperature as Celsius
+  float tempC = dht.readTemperature();
+  int soundValue = 0; //create variable to store many different readings
+  for (int i = 0; i < 32; i++) //create a for loop to read
+  {
+    soundValue += analogRead(sound_sensor);
+  } //read the sound sensor
 
-  // get smoothed value from the dataset:
-  if (newDataReady) {
-    if (millis() > t + serialPrintInterval) {
-      float i = LoadCell.getData();
-      Serial.print("Load_cell output val: ");
-      Serial.println(i);
-      newDataReady = 0;
-      t = millis();
-    }
-  }
-
-  // receive command from serial terminal
-  if (Serial.available() > 0) {
-    char inByte = Serial.read();
-    if (inByte == 't') LoadCell.tareNoDelay(); //tare
-    else if (inByte == 'r') calibrate(); //calibrate
-    else if (inByte == 'c') changeSavedCalFactor(); //edit calibration value manually
-  }
+  soundValue >>= 5; //bitshift operation
 
   // check if last tare operation is complete
   if (LoadCell.getTareStatus() == true) {
@@ -85,31 +65,36 @@ void loop() {
 
 
   // check if any reads failed
-  if (isnan(humi) || isnan(tempC)) {
+  if (isnan(humi) || isnan(tempC) || isnan(soundValue)) {
     Serial.println("Failed to read from DHT sensor!");
   } else {
-    Serial.print("Time: ");
+    Serial.print(hive_id);
+    Serial.print(";");
+
     Serial.print(currentTime);
-    
-    Serial.print("  |  "); 
+    Serial.print(",");
 
-    Serial.print("Humidity: ");
     Serial.print(humi);
-    Serial.print("%");
+    Serial.print(",");
 
-    Serial.print("  |  "); 
-
-    Serial.print("Temperature: ");
     Serial.print(tempC);
-    Serial.print("C");
+    Serial.print(",");
 
-     Serial.print("  |  "); 
+    Serial.print(soundValue); //print the value of sound sensor
+    Serial.print(",");
 
-    Serial.print("Noise level: ");
-    Serial.println(soundValue); //print the value of sound sensor
+      // check for new data/start next conversion:
+  if (LoadCell.update()) newDataReady = true;
 
+  // get smoothed value from the dataset:
+  if (newDataReady) {
+    if (millis() > t + serialPrintInterval) {
+      float i = LoadCell.getData();
+      Serial.println(i);
+      newDataReady = 0;
+      t = millis();
+    }
+  }
 
-
-    Serial.print("\n");
   }
 }
