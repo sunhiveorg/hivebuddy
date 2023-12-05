@@ -1,11 +1,11 @@
 package com.sunhive.hivebuddy.services;
+import com.sunhive.hivebuddy.controllers.WebSocketTextController;
 import com.opencsv.CSVWriter;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,12 @@ import com.sunhive.hivebuddy.repository.SensorDataRepository;
 @Service
 public class SensorDataServiceImpl implements SensorDataService {
     private final SensorDataRepository sensorDataRepository;
+    private final WebSocketTextController webSocketTextController;
 
     @Autowired
-    public SensorDataServiceImpl(SensorDataRepository sensorDataRepository) {
+    public SensorDataServiceImpl(SensorDataRepository sensorDataRepository, WebSocketTextController webSocketTextController) {
         this.sensorDataRepository = sensorDataRepository;
+        this.webSocketTextController = webSocketTextController;
     }
 
     public List<SensorData> getSensorDatas() {
@@ -31,9 +33,12 @@ public class SensorDataServiceImpl implements SensorDataService {
     }
 
     public void addNewData(SensorData sensorData) {
-        sensorData.setTimestamp(LocalDateTime.now());
         sensorDataRepository.save(sensorData);
         System.out.println(sensorData);
+    }
+
+    public void showRealtime(List<SensorData> sensorDataList){
+        webSocketTextController.sendMessage(sensorDataList);
     }
 
 

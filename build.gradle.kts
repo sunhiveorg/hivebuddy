@@ -33,8 +33,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	runtimeOnly("org.postgresql:postgresql")
 
-	implementation("com.google.code.gson:gson:2.10.1")
+//	implementation("com.google.code.gson:gson:2.10.1")
 	implementation("com.opencsv:opencsv:5.5")
+
+	implementation("org.springframework.boot:spring-boot-starter-websocket")
 }
 
 tasks.withType<Test> {

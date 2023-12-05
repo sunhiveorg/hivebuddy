@@ -7,10 +7,10 @@ import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 //import com.fazecast.jSerialComm.SerialPortEventListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+//import com.google.gson.Gson;
+//import com.google.gson.JsonElement;
+//import com.google.gson.JsonObject;
+//import com.google.gson.JsonParser;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -165,13 +165,17 @@ public class ArduinoDataReceiver implements SerialPortDataListener {
         String[] data = message.split(";");
         String[] info = data[0].split(",");
         String[] parts = data[1].split(",");
+        Long hive_id = Long.parseLong(String.valueOf(info[0]));
+        List<SensorData> sensorDataList = new ArrayList<>();
         for (int i = 0; i < parts.length; i++){
             // 1 - temperatureOut, 2 - temperatureIn, 3 - humidityIn, 4 - weight, 5 - mic
-            SensorData sensorData = new SensorData((long) (i + 1),Long.parseLong(String.valueOf(info[0])),Double.parseDouble(String.valueOf(parts[i])));
+            SensorData sensorData = new SensorData((long) (i + 1),hive_id,Double.parseDouble(String.valueOf(parts[i])),LocalDateTime.now());
 //            System.out.println(i + ": " + sensorData.getValue());
             saveDataToDatabase(sensorData);
+            sensorDataList.add(sensorData);
 //            sensorDataRepository.save(sensorData);
         }
+        showRealtime(sensorDataList);
 //        String time = parts[0];
 //        String humidity = parts[1];
 //        String temperature = parts[2];
@@ -192,5 +196,9 @@ public class ArduinoDataReceiver implements SerialPortDataListener {
 
     private void saveDataToDatabase(SensorData sensorData){
         sensorDataService.addNewData(sensorData);
+    }
+
+    private void showRealtime(List<SensorData> sensorDataList){
+        sensorDataService.showRealtime(sensorDataList);
     }
 }
