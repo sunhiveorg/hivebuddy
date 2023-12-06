@@ -175,7 +175,7 @@ public class ArduinoDataReceiver implements SerialPortDataListener {
             sensorDataList.add(sensorData);
 //            sensorDataRepository.save(sensorData);
         }
-        showRealtime(sensorDataList);
+//        showRealtime(sensorDataList);
 //        String time = parts[0];
 //        String humidity = parts[1];
 //        String temperature = parts[2];
@@ -198,7 +198,7 @@ public class ArduinoDataReceiver implements SerialPortDataListener {
         sensorDataService.addNewData(sensorData);
     }
 
-    private void showRealtime(List<SensorData> sensorDataList){
-        sensorDataService.showRealtime(sensorDataList);
-    }
+//    private void showRealtime(List<SensorData> sensorDataList){
+//        sensorDataService.showRealtime(sensorDataList);
+//    }
 }

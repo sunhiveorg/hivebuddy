@@ -34,12 +34,13 @@ public class SensorDataServiceImpl implements SensorDataService {
 
     public void addNewData(SensorData sensorData) {
         sensorDataRepository.save(sensorData);
+        webSocketTextController.sendMessage(String.valueOf(sensorData.getValue()).lines().toList());
         System.out.println(sensorData);
     }
 
-    public void showRealtime(List<SensorData> sensorDataList){
-        webSocketTextController.sendMessage(sensorDataList);
-    }
+//    public void showRealtime(List<SensorData> sensorDataList){
+//        webSocketTextController.sendMessage(sensorDataList);
+//    }
 
 
     // Returns List of Objects, by index 0 ID and date at Index 1
