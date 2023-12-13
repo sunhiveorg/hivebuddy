@@ -33,6 +33,7 @@ public class SensorDataServiceImpl implements SensorDataService {
     }
 
     public void addNewData(SensorData sensorData) {
+//        sensorData.setTimestamp(LocalDateTime.now());
         sensorDataRepository.save(sensorData);
         System.out.println(sensorData);
     }

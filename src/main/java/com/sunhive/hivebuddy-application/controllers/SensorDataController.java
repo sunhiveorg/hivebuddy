@@ -1,5 +1,6 @@
 package com.sunhive.hivebuddy.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,8 @@ public class SensorDataController {
         return sensorDataServiceImpl.getSensorDatasLatestById(id);
     }
 
-    @PostMapping
+    @PostMapping(
+            consumes = "application/json", produces = "application/json")
     public void registerNewSensorData(@RequestBody SensorData sensorData) {
         sensorDataServiceImpl.addNewData(sensorData);
     }

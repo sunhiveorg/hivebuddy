@@ -1,6 +1,6 @@
 # GET http://localhost:8080/api/v1/data
 
-POST http://localhost:8080/api/v1/data
+POST http://localhost:8080/api/v1/data/test
 Content-Type: application/json
 
 {
