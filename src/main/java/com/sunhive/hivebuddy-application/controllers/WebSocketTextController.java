@@ -2,6 +2,7 @@ package com.sunhive.hivebuddy.controllers;
 
 import com.sunhive.hivebuddy.data.SensorData;
 import com.sunhive.hivebuddy.data.TextMessageDTO;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,16 +25,17 @@ public class WebSocketTextController {
 
     @PostMapping("/send")
 //    public ResponseEntity<Void> sendMessage(@RequestBody TextMessageDTO textMessageDTO) {
-    public ResponseEntity<Void> sendMessage(@RequestBody List<SensorData> sensorDataList) {
+    public ResponseEntity<Void> sendMessage(@RequestBody SensorData sensorData) {
 //        TextMessageDTO textMessageDTO = new TextMessageDTO();
 //        textMessageDTO.setMessage(String.valueOf(sensorDataList.getValue()));
-        String[][] realtimeData = new String[sensorDataList.size()][2];
-        for (int i = 0; i < sensorDataList.size(); i++) {
-            realtimeData[i][1] = String.valueOf(sensorDataList.get(i).getsensorTypeId());
-            realtimeData[i][2] = String.valueOf(sensorDataList.get(i).getValue());
-        }
+//        String[][] realtimeData = new String[sensorDataList.size()][2];
+//        for (int i = 0; i < sensorDataList.size(); i++) {
+//            realtimeData[i][1] = String.valueOf(sensorDataList.get(i).getsensorTypeId());
+//            realtimeData[i][2] = String.valueOf(sensorDataList.get(i).getValue());
+//        }
 //        template.convertAndSend("/overview/"+sensorDataList.get(0).gethiveId(), realtimeData);
-        template.convertAndSend("/overview/"+sensorDataList.get(0).gethiveId(), sensorDataList.get(0));
+//        template.convertAndSend("/overview/"+sensorDataList.get(0).gethiveId(), sensorDataList);
+        template.convertAndSend("/topic/overview/1/1", sensorData);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -43,11 +45,14 @@ public class WebSocketTextController {
     }
 
 
-    @SendTo("/overview/{hiveId}")
+    @SendTo("/topic/overview/1/1")
 //    public String[][] broadcastMessage(@Payload String[][] realtimeData) {
 //        return realtimeData;
 //    }
-    public SensorData broadcastMessage(@Payload SensorData sensorData) {
-        return sensorData;
+//    public SensorData broadcastMessage(@Payload SensorData sensorData) {
+//        return sensorData;
+//    }
+    public String broadcastMessage(@Payload SensorData sensorData) {
+        return sensorData.toString();
     }
 }

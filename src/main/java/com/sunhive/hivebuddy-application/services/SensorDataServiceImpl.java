@@ -1,5 +1,6 @@
 package com.sunhive.hivebuddy.services;
 import com.sunhive.hivebuddy.controllers.WebSocketTextController;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.opencsv.CSVWriter;
 
 import java.io.File;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +40,9 @@ public class SensorDataServiceImpl implements SensorDataService {
         System.out.println(sensorData);
     }
 
-    public void showRealtime(List<SensorData> sensorDataList){
-        webSocketTextController.sendMessage(sensorDataList);
+    public void showRealtime(SensorData sensorData){
+//        sensorDataList.get()
+        webSocketTextController.sendMessage(sensorData);
     }
 
 

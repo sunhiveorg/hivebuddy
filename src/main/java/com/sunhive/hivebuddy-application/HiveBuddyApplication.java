@@ -11,3 +11,5 @@ public class HiveBuddyApplication {
     }
 
 }
+
+// TODO : add a table for sensor types
