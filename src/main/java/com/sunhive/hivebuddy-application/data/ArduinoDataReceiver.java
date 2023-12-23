@@ -107,25 +107,22 @@ import java.util.logging.Logger;
 @Service
 //public class ArduinoDataReceiver implements SerialPortEventListener {
 public class ArduinoDataReceiver implements SerialPortDataListener {
-    private List<ArduinoData> receivedDataList = new ArrayList<>();
+    //private List<ArduinoData> receivedDataList = new ArrayList<>();
     private StringBuilder currentMessage = new StringBuilder();
     private ObjectMapper objectMapper = new ObjectMapper();
     private File jsonFile = new File("receivedData.json");
     private final SensorDataService sensorDataService;
+
     @Autowired
     public ArduinoDataReceiver(SensorDataService sensorDataService) {
         this.sensorDataService = sensorDataService;
     }
 
-//    @Override
     public int getListeningEvents() {
-//        return 0;
         return SerialPort.LISTENING_EVENT_DATA_RECEIVED;
     }
 
-//    @Override
     public void serialEvent(SerialPortEvent serialPortEvent) {
-//        StringBuilder currentMessage = new StringBuilder();
         if (serialPortEvent.getEventType() == SerialPort.LISTENING_EVENT_DATA_RECEIVED) {
             byte[] receivedData = serialPortEvent.getReceivedData();
             String newDataChunk = new String(receivedData);
@@ -136,12 +133,11 @@ public class ArduinoDataReceiver implements SerialPortDataListener {
             // Check if the chunk contains a complete message (ends with a newline)
 //            if (newDataChunk.contains("\n")) {
             if (newDataChunk.contains("\r\n")) {
-//            if (newDataChunk.indexOf("\r\n",1) == -1) {
                 // Process the complete message
                 int lastIndex = currentMessage.lastIndexOf("\r\n");
-                int preLastIndex = currentMessage.lastIndexOf("\r\n",lastIndex-1);
+                int preLastIndex = currentMessage.lastIndexOf("\r\n", lastIndex - 1);
 //                String completeMessage = currentMessage.toString().trim();
-                String completeMessage = currentMessage.toString().trim().substring(preLastIndex == -1 ? 0 : preLastIndex,lastIndex).replaceAll("\r\n","").replaceAll("\"","");
+                String completeMessage = currentMessage.toString().trim().substring(preLastIndex == -1 ? 0 : preLastIndex, lastIndex).replaceAll("\r\n", "").replaceAll("\"", "");
 //                String completeMessage2 = completeMessage.substring(preLastIndex,lastIndex);
 //                String completeMessage3 = completeMessage2.replace("\r\n","");
                 System.out.println("Received Data: " + completeMessage);
@@ -167,22 +163,14 @@ public class ArduinoDataReceiver implements SerialPortDataListener {
         String[] parts = data[1].split(",");
         Long hive_id = Long.parseLong(String.valueOf(info[0]));
         List<SensorData> sensorDataList = new ArrayList<>();
-        for (int i = 0; i < parts.length; i++){
+        for (int i = 0; i < parts.length; i++) {
             // 1 - temperatureOut, 2 - temperatureIn, 3 - humidityIn, 4 - weight, 5 - mic
-            SensorData sensorData = new SensorData((long) (i + 1),hive_id,Double.parseDouble(String.valueOf(parts[i])),LocalDateTime.now());
+            SensorData sensorData = new SensorData((long) (i + 1), hive_id, Double.parseDouble(String.valueOf(parts[i])), LocalDateTime.now());
 //            System.out.println(i + ": " + sensorData.getValue());
             saveDataToDatabase(sensorData);
             sensorDataList.add(sensorData);
 //            sensorDataRepository.save(sensorData);
         }
-//        showRealtime(sensorDataList);
-//        String time = parts[0];
-//        String humidity = parts[1];
-//        String temperature = parts[2];
-//        String time = parts[0].substring(6).trim();
-//        String humidity = parts[1].substring(10).trim();
-//        String temperature = parts[2].substring(13).trim();
-//        return new ArduinoData(time, humidity, temperature);
     }
 
 //    private void saveDataToJsonFile() {
@@ -194,11 +182,7 @@ public class ArduinoDataReceiver implements SerialPortDataListener {
 //        }
 //    }
 
-    private void saveDataToDatabase(SensorData sensorData){
+    private void saveDataToDatabase(SensorData sensorData) {
         sensorDataService.addNewData(sensorData);
     }
-
-//    private void showRealtime(List<SensorData> sensorDataList){
-//        sensorDataService.showRealtime(sensorDataList);
-//    }
 }

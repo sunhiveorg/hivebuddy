@@ -1,17 +1,18 @@
 package com.sunhive.hivebuddy.controllers;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import com.google.gson.Gson;
-import org.json.JSONArray;
+import com.sunhive.hivebuddy.data.LoginDTO;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.sunhive.hivebuddy.data.SensorData;
 import com.sunhive.hivebuddy.services.SensorDataServiceImpl;
-import org.json.JSONObject;
+
 
 @CrossyOrigin(origins = "http://localhost:3000")
 @RestController
@@ -34,22 +35,20 @@ public class SensorDataController {
         return sensorDataServiceImpl.getSensorDatasLatestById(id);
     }
 
-    @PostMapping(
-            consumes = "application/json", produces = "application/json")
+    @PostMapping
     public void registerNewSensorData(@RequestBody SensorData sensorData) {
-        sensorDataServiceImpl.showRealtime(sensorData);
         sensorDataServiceImpl.addNewData(sensorData);
     }
+    @PostMapping(path = "/login")
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO)
+    {
+        String hiveId = loginDTO.getHiveId();
 
-    @PostMapping(
-            value = "/realtime", consumes = "application/json", produces = "application/json")
-    public void showRealtime(@RequestBody JSONObject jsonObject) {
-//        JSONArray jsonArray = (JSONArray) jsonObject;
-//        Gson gson = new Gson();
-//        List<SensorData> sensorData = new ArrayList<>();
-//        for (Object data : jsonObject.getJSONArray("result")){
-//           sensorData.add(gson.fromJson(data.toString(),SensorData.class));
-//        }
-//        sensorDataServiceImpl.showRealtime(sensorData);
+        List<SensorData> hiveIds = sensorDataServiceImpl.getAllHiveIds();
+        if (hiveIds.contains(Long.parseLong(hiveId))) {
+            return ResponseEntity.ok("Login successful");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid  ID");
+        }
     }
 }

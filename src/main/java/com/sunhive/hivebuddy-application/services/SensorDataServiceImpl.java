@@ -1,6 +1,6 @@
 package com.sunhive.hivebuddy.services;
+
 import com.sunhive.hivebuddy.controllers.WebSocketTextController;
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.opencsv.CSVWriter;
 
 import java.io.File;
@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,32 +29,22 @@ public class SensorDataServiceImpl implements SensorDataService {
     public List<SensorData> getSensorDatas() {
         return sensorDataRepository.findAll();
     }
+
     public List<SensorData> getSensorDatasLatestById(Long id) {
         return sensorDataRepository.findAllLatestByHiveId(id, LocalDateTime.now());
     }
 
+    public List<SensorData> getAllHiveIds() {
+        return sensorDataRepository.findAllHiveIds();
+    }
+
     public void addNewData(SensorData sensorData) {
-//        sensorData.setTimestamp(LocalDateTime.now());
         sensorDataRepository.save(sensorData);
+        webSocketTextController.sendMessage(String.valueOf(sensorData.getValue()).lines().toList());
         System.out.println(sensorData);
     }
 
-    public void showRealtime(SensorData sensorData){
-//        sensorDataList.get()
-        webSocketTextController.sendMessage(sensorData);
-    }
-
-
-    // Returns List of Objects, by index 0 ID and date at Index 1
-//    public List<Object[]> getDataFrom(String sensorID, Date startDate) {
-//        return sensorDataRepository.getDataFrom(sensorID, startDate);
-//    }
-
-    /*
-    I DONT KNOW IF IT GONNA WORK, In theory I did everything right
-    should this code be here? i th
-     */
-
+    //TODO: remove this
     public void createCSVForSensorData(String sensorID, LocalDateTime startDate) {
         List<Object[]> rawData = sensorDataRepository.getDataFrom(sensorID, startDate);
 
@@ -76,17 +65,8 @@ public class SensorDataServiceImpl implements SensorDataService {
             }
 
         } catch (IOException e) {
-            e.printStackTrace(); // Really bad handling but fuck it, ill come up with something later
+            e.printStackTrace();
         }
     }
 
-    // public void addNewData(
-    //         Long sensorTypeId,
-    //         Long hiveId,
-    //         int value) {
-    //     SensorData sensorData;
-    //     sensorData.setId(hiveId);
-    //     // sensorDataRepository.save(sensorData);
-    //     System.out.println(sensorData);
-    // }
 }
