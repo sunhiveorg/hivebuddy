@@ -1,17 +1,14 @@
 package com.sunhive.hivebuddy.controllers;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.sunhive.hivebuddy.data.LoginDTO;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import com.sunhive.hivebuddy.data.SensorData;
+import com.sunhive.hivebuddy.services.SensorDataServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.sunhive.hivebuddy.data.SensorData;
-import com.sunhive.hivebuddy.services.SensorDataServiceImpl;
+import java.util.List;
 
 
 @CrossyOrigin(origins = "http://localhost:3000")
