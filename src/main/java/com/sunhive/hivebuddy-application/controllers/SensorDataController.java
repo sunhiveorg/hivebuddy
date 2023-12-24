@@ -34,6 +34,7 @@ public class SensorDataController {
 
     @PostMapping
     public void registerNewSensorData(@RequestBody SensorData sensorData) {
+        sensorDataServiceImpl.showRealtime(sensorData);
         sensorDataServiceImpl.addNewData(sensorData);
     }
     @PostMapping(path = "/login")

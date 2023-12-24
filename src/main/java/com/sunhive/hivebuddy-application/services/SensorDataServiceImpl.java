@@ -40,9 +40,15 @@ public class SensorDataServiceImpl implements SensorDataService {
 
     public void addNewData(SensorData sensorData) {
         sensorDataRepository.save(sensorData);
-        webSocketTextController.sendMessage(String.valueOf(sensorData.getValue()).lines().toList());
+//        webSocketTextController.sendMessage(String.valueOf(sensorData.getValue()).lines().toList());
         System.out.println(sensorData);
     }
+
+    public void showRealtime(SensorData sensorData){
+//        sensorDataList.get()
+        webSocketTextController.sendMessage(sensorData);
+    }
+
 
     //TODO: remove this
     public void createCSVForSensorData(String sensorID, LocalDateTime startDate) {

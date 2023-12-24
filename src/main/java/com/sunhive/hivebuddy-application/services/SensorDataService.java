@@ -10,6 +10,7 @@ public interface SensorDataService {
     public List<SensorData> getSensorDatas();
 
     public void addNewData(SensorData sensorData);
+    public void showRealtime(SensorData sensorData);
 
     public void createCSVForSensorData(String sensorID, LocalDateTime startDate);
 }
