@@ -15,32 +15,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.Array;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class WebSocketTextController {
 
+    @Autowired
     SimpMessagingTemplate template;
 
-    @Autowired
-    public WebSocketTextController(SimpMessagingTemplate template) {
-        this.template = template;
-    }
-
     @PostMapping("/send")
-    public ResponseEntity<Void> sendMessage(@RequestBody List<String> textMessages) {
-        List<TextMessageDTO> textMessageDTOs = textMessages.stream()
-                .map(message -> {
-                    TextMessageDTO dto = new TextMessageDTO();
-                    dto.setMessage(message);
-                    return dto;
-                })
-                .collect(Collectors.toList());
-
-        template.convertAndSend("/topic/message", textMessageDTOs);
+//    public ResponseEntity<Void> sendMessage(@RequestBody TextMessageDTO textMessageDTO) {
+    public ResponseEntity<Void> sendMessage(@RequestBody SensorData sensorData) {
+//        TextMessageDTO textMessageDTO = new TextMessageDTO();
+//        textMessageDTO.setMessage(String.valueOf(sensorDataList.getValue()));
+//        String[][] realtimeData = new String[sensorDataList.size()][2];
+//        for (int i = 0; i < sensorDataList.size(); i++) {
+//            realtimeData[i][1] = String.valueOf(sensorDataList.get(i).getsensorTypeId());
+//            realtimeData[i][2] = String.valueOf(sensorDataList.get(i).getValue());
+//        }
+//        template.convertAndSend("/overview/"+sensorDataList.get(0).gethiveId(), realtimeData);
+//        template.convertAndSend("/overview/"+sensorDataList.get(0).gethiveId(), sensorDataList);
+        template.convertAndSend("/topic/overview/1/1", sensorData);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
     @MessageMapping("/sendMessage")
     public void receiveMessage(@Payload TextMessageDTO textMessageDTO) {
@@ -48,20 +44,14 @@ public class WebSocketTextController {
     }
 
 
-    @SendTo("/overview/{hiveId}")
+    @SendTo("/topic/overview/1/1")
 //    public String[][] broadcastMessage(@Payload String[][] realtimeData) {
 //        return realtimeData;
 //    }
-    public SensorData broadcastMessage(@Payload SensorData sensorData) {
-        return sensorData;
-    }
-
-    //    @SendTo("/topic/message")
-//    public TextMessageDTO broadcastMessage(@Payload TextMessageDTO textMessageDTO) {
-//        return textMessageDTO;
+//    public SensorData broadcastMessage(@Payload SensorData sensorData) {
+//        return sensorData;
 //    }
-    @SendTo("/topic/message")
-    public List<TextMessageDTO> broadcastMessage(@Payload List<TextMessageDTO> textMessageDTOs) {
-        return textMessageDTOs;
+    public String broadcastMessage(@Payload SensorData sensorData) {
+        return sensorData.toString();
     }
 }
