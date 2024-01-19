@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,4 +30,7 @@ public interface SensorDataRepository extends JpaRepository<SensorData,Long> {
 
     @Query("SELECT DISTINCT s.hiveId FROM SensorsData s")
     List<SensorData> findAllHiveIds();
+
+    @Query("select a from SensorsData a where a.hiveId = :id")
+    List<SensorData> isHiveIdExists(@Param("id") Long id);
 }

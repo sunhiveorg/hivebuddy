@@ -23,7 +23,6 @@ public class WebSocketTextController {
     SimpMessagingTemplate template;
 
     @PostMapping("/send")
-//    public ResponseEntity<Void> sendMessage(@RequestBody TextMessageDTO textMessageDTO) {
     public ResponseEntity<Void> sendMessage(@RequestBody SensorData sensorData) {
 //        TextMessageDTO textMessageDTO = new TextMessageDTO();
 //        textMessageDTO.setMessage(String.valueOf(sensorDataList.getValue()));

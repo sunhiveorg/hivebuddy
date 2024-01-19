@@ -8,8 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
+import org.hibernate.query.spi.Limit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.sunhive.hivebuddy.data.SensorData;
@@ -38,13 +42,18 @@ public class SensorDataServiceImpl implements SensorDataService {
         return sensorDataRepository.findAllHiveIds();
     }
 
+    public boolean checkHiveIdExists(Long id) {
+        return !sensorDataRepository.isHiveIdExists(id).isEmpty();
+    }
+
+
     public void addNewData(SensorData sensorData) {
         sensorDataRepository.save(sensorData);
 //        webSocketTextController.sendMessage(String.valueOf(sensorData.getValue()).lines().toList());
         System.out.println(sensorData);
     }
 
-    public void showRealtime(SensorData sensorData){
+    public void showRealtime(SensorData sensorData) {
 //        sensorDataList.get()
         webSocketTextController.sendMessage(sensorData);
     }

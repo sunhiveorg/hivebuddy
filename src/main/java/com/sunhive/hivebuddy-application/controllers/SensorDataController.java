@@ -1,10 +1,10 @@
 package com.sunhive.hivebuddy.controllers;
 
-import com.sunhive.hivebuddy.data.LoginDTO;
 import com.sunhive.hivebuddy.data.SensorData;
 import com.sunhive.hivebuddy.services.SensorDataServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,8 @@ import java.util.List;
 
 @CrossyOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(path = "api/v1/data")
+@RequestMapping(path = "api/v1/data", method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
 public class SensorDataController {
     private final SensorDataServiceImpl sensorDataServiceImpl;
 
@@ -28,7 +29,7 @@ public class SensorDataController {
     }
 
     @GetMapping("/latest")
-    public List<SensorData> getSensorDataLatestById(@RequestParam Long id){
+    public List<SensorData> getSensorDataLatestById(@RequestParam Long id) {
         return sensorDataServiceImpl.getSensorDatasLatestById(id);
     }
 
@@ -37,16 +38,15 @@ public class SensorDataController {
         sensorDataServiceImpl.showRealtime(sensorData);
         sensorDataServiceImpl.addNewData(sensorData);
     }
-    @PostMapping(path = "/login")
-    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO)
-    {
-        String hiveId = loginDTO.getHiveId();
 
-        List<SensorData> hiveIds = sensorDataServiceImpl.getAllHiveIds();
-        if (hiveIds.contains(Long.parseLong(hiveId))) {
-            return ResponseEntity.ok("Login successful");
+    @GetMapping(path = "/login/{hiveId}")
+//    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<String> login(@PathVariable Long hiveId) {
+        if (sensorDataServiceImpl.checkHiveIdExists(hiveId)) {
+            return ResponseEntity.ok("{\"status\":\"OK\"}");
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid  ID");
+            return ResponseEntity.notFound().build();
         }
+//        return sensorDataServiceImpl.checkHiveIdExists(hiveId);
     }
 }
