@@ -24,13 +24,15 @@ public interface SensorDataRepository extends JpaRepository<SensorData,Long> {
 
 
 //    List<SensorData> findAllLatestByHiveId(Long hive_id);
-    @Query("select a from SensorsData a where a.timestamp <= :creationDateTime and a.hiveId = :hive_id ORDER BY timestamp DESC LIMIT 5")
-    List<SensorData> findAllLatestByHiveId(Long hive_id,
-            @Param("creationDateTime") LocalDateTime creationDateTime);
+//    @Query("select a from SensorsData a where a.timestamp <= :creationDateTime and a.hiveId = :hive_id ORDER BY timestamp DESC LIMIT 5")
+//    List<SensorData> findAllLatestByHiveId(Long hive_id,
+//            @Param("creationDateTime") LocalDateTime creationDateTime);
 
     @Query("SELECT DISTINCT s.hiveId FROM SensorsData s")
     List<SensorData> findAllHiveIds();
 
     @Query("select a from SensorsData a where a.hiveId = :id")
     List<SensorData> isHiveIdExists(@Param("id") Long id);
+
+    List<SensorData> getFirst10ByHiveIdAndSensorTypeIdOrderByTimestamp(Long hiveId, Long sensorTypeId);
 }

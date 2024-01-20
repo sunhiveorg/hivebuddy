@@ -34,8 +34,12 @@ public class SensorDataServiceImpl implements SensorDataService {
         return sensorDataRepository.findAll();
     }
 
-    public List<SensorData> getSensorDatasLatestById(Long id) {
-        return sensorDataRepository.findAllLatestByHiveId(id, LocalDateTime.now());
+//    public List<SensorData> getSensorDatasLatestById(Long id) {
+//        return sensorDataRepository.findAllLatestByHiveId(id, LocalDateTime.now());
+//    }
+
+    public List<SensorData> getOneSensorDataLatest10(Long hiveId, Long sensorTypeId) {
+        return sensorDataRepository.getFirst10ByHiveIdAndSensorTypeIdOrderByTimestamp(hiveId, sensorTypeId);
     }
 
     public List<SensorData> getAllHiveIds() {

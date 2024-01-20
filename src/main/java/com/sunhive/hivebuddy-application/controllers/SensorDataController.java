@@ -28,9 +28,15 @@ public class SensorDataController {
         return sensorDataServiceImpl.getSensorDatas();
     }
 
+//    @GetMapping("/latest")
+//    public List<SensorData> getSensorDataLatestById(@RequestParam Long id) {
+//        return sensorDataServiceImpl.getSensorDatasLatestById(id);
+//    }
+
+    @CrossyOrigin(origins = "http://localhost:3000")
     @GetMapping("/latest")
-    public List<SensorData> getSensorDataLatestById(@RequestParam Long id) {
-        return sensorDataServiceImpl.getSensorDatasLatestById(id);
+    public List<SensorData> getOneSensorDataLatest10(@RequestParam Long hiveId, @RequestParam Long sensorTypeId) {
+        return sensorDataServiceImpl.getOneSensorDataLatest10(hiveId, sensorTypeId);
     }
 
     @PostMapping
