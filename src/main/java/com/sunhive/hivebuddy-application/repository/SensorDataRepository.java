@@ -34,5 +34,5 @@ public interface SensorDataRepository extends JpaRepository<SensorData,Long> {
     @Query("select a from SensorsData a where a.hiveId = :id")
     List<SensorData> isHiveIdExists(@Param("id") Long id);
 
-    List<SensorData> getFirst10ByHiveIdAndSensorTypeIdOrderByTimestamp(Long hiveId, Long sensorTypeId);
+    List<SensorData> getFirst10ByHiveIdAndSensorTypeIdOrderByTimestampDesc(Long hiveId, Long sensorTypeId);
 }

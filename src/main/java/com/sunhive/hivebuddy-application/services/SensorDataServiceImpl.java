@@ -39,7 +39,7 @@ public class SensorDataServiceImpl implements SensorDataService {
 //    }
 
     public List<SensorData> getOneSensorDataLatest10(Long hiveId, Long sensorTypeId) {
-        return sensorDataRepository.getFirst10ByHiveIdAndSensorTypeIdOrderByTimestamp(hiveId, sensorTypeId);
+        return sensorDataRepository.getFirst10ByHiveIdAndSensorTypeIdOrderByTimestampDesc(hiveId, sensorTypeId);
     }
 
     public List<SensorData> getAllHiveIds() {
