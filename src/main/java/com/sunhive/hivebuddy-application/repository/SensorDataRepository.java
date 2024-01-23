@@ -35,4 +35,7 @@ public interface SensorDataRepository extends JpaRepository<SensorData,Long> {
     List<SensorData> isHiveIdExists(@Param("id") Long id);
 
     List<SensorData> getFirst10ByHiveIdAndSensorTypeIdOrderByTimestampDesc(Long hiveId, Long sensorTypeId);
+
+    List<SensorData> getFirst50ByHiveIdAndSensorTypeIdOrderByTimestampDesc(Long hiveId, Long sensorTypeId);
+    List<SensorData> getFirst100ByHiveIdAndSensorTypeIdOrderByTimestampDesc(Long hiveId, Long sensorTypeId);
 }

@@ -38,8 +38,14 @@ public class SensorDataServiceImpl implements SensorDataService {
 //        return sensorDataRepository.findAllLatestByHiveId(id, LocalDateTime.now());
 //    }
 
-    public List<SensorData> getOneSensorDataLatest10(Long hiveId, Long sensorTypeId) {
-        return sensorDataRepository.getFirst10ByHiveIdAndSensorTypeIdOrderByTimestampDesc(hiveId, sensorTypeId);
+    public List<SensorData> getOneSensorDataLatest(Long hiveId, Long sensorTypeId, Long rowsAmount) {
+        if (rowsAmount < 11){
+            return sensorDataRepository.getFirst10ByHiveIdAndSensorTypeIdOrderByTimestampDesc(hiveId, sensorTypeId);
+        } else if (rowsAmount < 51){
+            return sensorDataRepository.getFirst50ByHiveIdAndSensorTypeIdOrderByTimestampDesc(hiveId, sensorTypeId);
+        } else {
+            return sensorDataRepository.getFirst100ByHiveIdAndSensorTypeIdOrderByTimestampDesc(hiveId, sensorTypeId);
+        }
     }
 
     public List<SensorData> getAllHiveIds() {
