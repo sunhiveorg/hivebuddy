@@ -14,32 +14,66 @@ Your Beekeeping Companion
 
 </div>
 
-## About
+## 📝 About
 A project that focuses on optimizing bee keepers work by collecting and processing data like temperature, humidity, noise level and air gases.
 
 
-## Development
+## 🔧 Development
+
+Run application
 
 `./gradlew bootRun`
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Watch for changes
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+`./gradlew build -t -xtest`
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## 📣 Roadmap
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+- **Research and Planning:** Conduct surveys/interviews, identify key data points (temperature, humidity, noise, gases), and review existing solutions.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+- **Prototype Development:** Design sensor setups, create a basic data processing application, and develop a user-friendly interface.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+- **Testing and Feedback:** Implement prototypes in select apiaries, gather user feedback, and iterate on the design.
 
-## License
-For open source projects, say how it is licensed.
+- **Advanced Features and Scalability:** Add analytics capabilities, implement cloud storage, and develop mobile applications for real-time monitoring.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- **Launch and Maintenance:** Officially launch the product, provide user documentation, and establish community support forums.
+
+## 🏗️ Contributing
+
+- **Open Collaboration:** Contributions from anyone interested in improving the project are welcome.
+- **Respect and Inclusion:** Ensure a respectful environment for all participants, regardless of expertise level, background, or opinion.
+
+### How to Contribute
+
+1. **Joining the Project:**
+   - Sign up on the project repository (e.g., GitHub, GitLab).
+   - Familiarize yourself with the project's objectives and ongoing tasks.
+
+2. **Reporting Issues:**
+   - Use the issue tracker to report bugs or propose enhancements.
+   - Provide clear descriptions and necessary context for your reports.
+
+3. **Submitting Code:**
+   - Fork the repository and create a feature branch for your changes.
+   - Follow coding standards and best practices outlined in the documentation.
+   - Include tests wherever applicable.
+   - Submit a pull request with a descriptive title and summary of changes.
+
+4. **Documentation Contributions:**
+   - Contribute to user guides, API documentation, and tutorials.
+   - Ensure all documentation is clear, concise, and up to date.
+
+5. **Participating in Discussions:**
+   - Engage in project discussions on forums or chat platforms.
+   - Share insights, questions, and suggestions to foster collaboration.
+
+### Review Process
+
+- Contributions will be reviewed by project maintainers before integration into the main codebase.
+- Feedback will be provided to ensure code quality and alignment with project goals.
+
+### Licensing
+
+- All contributions fall under the project's chosen license (e.g., MIT License, Apache License), ensuring proper attribution and openness.
